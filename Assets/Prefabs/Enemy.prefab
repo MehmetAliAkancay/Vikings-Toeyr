@@ -226,7 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be4fdf9a3acc26489b930c5a32acaa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 5141066049876553391}
 --- !u!1 &5537497977451149473
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +306,7 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 1985226976}
   triggerArea: {fileID: 5537497977811331297}
+  hitBox: {fileID: 5141066049876553391}
   amIDead: 0
 --- !u!95 &5537497977309231184
 Animator:

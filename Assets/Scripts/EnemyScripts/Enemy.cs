@@ -13,6 +13,7 @@ public class Enemy : Character
     [HideInInspector]public bool inRange;
     public GameObject hotZone;
     public GameObject triggerArea;
+    public GameObject hitBox;
     public bool amIDead;
     #endregion
 
@@ -172,6 +173,6 @@ public class Enemy : Character
         enemyCollider.enabled = false;
         animator.enabled = false;
         this.enabled = false;
+        hitBox.SetActive(false);
     }
 }
-
