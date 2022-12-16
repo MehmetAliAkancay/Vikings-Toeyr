@@ -8,9 +8,10 @@ public class Player : Character
     private Rigidbody2D rb;
     private Vector3 velocity;
     [SerializeField] Animator animator;
+    private SpriteRenderer spriteRenderer;
     private Player()
     {
-        hp = 80;
+        hp = 20;
         atackPower = 30;
         defence = 100; 
         jumpAmount = 5;
@@ -19,6 +20,7 @@ public class Player : Character
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer= GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -31,9 +33,11 @@ public class Player : Character
         if (hp <= 0)
         {
             Debug.Log("GameOver");
+            PlayerDie();
         }
         else
         {
+            StartCoroutine(DamageFade());
             Debug.Log("Damage yiyorsun canýn:"+hp);
         }
     }
@@ -58,6 +62,20 @@ public class Player : Character
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
+    }
+    IEnumerator DamageFade()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSecondsRealtime(0.4f);
+        spriteRenderer.color = Color.white;
+    }
+    private void PlayerDie()
+    {
+        spriteRenderer.color = Color.black;
+        Time.timeScale = 0;
+        rb.gravityScale = 0;
+        animator.enabled = false;
+        this.enabled = false;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
