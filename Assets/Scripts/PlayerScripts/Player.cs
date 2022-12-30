@@ -9,9 +9,10 @@ public class Player : Character
     private Vector3 velocity;
     [SerializeField] Animator animator;
     private SpriteRenderer spriteRenderer;
+    public HealthBar healthBar;
     private Player()
     {
-        hp = 20;
+        hp = 100;
         atackPower = 30;
         defence = 100; 
         jumpAmount = 5;
@@ -21,6 +22,7 @@ public class Player : Character
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer= GetComponent<SpriteRenderer>();
+        healthBar.SetMaxHealth(hp);
     }
     void Update()
     {
@@ -38,7 +40,7 @@ public class Player : Character
         else
         {
             StartCoroutine(DamageFade());
-            Debug.Log("Damage yiyorsun canýn:"+hp);
+            healthBar.SetHealth(hp);
         }
     }
     private void Movement()

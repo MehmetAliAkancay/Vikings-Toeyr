@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3673716200725771849}
+  healthBar: {fileID: 0}
 --- !u!114 &3673716200725771860
 MonoBehaviour:
   m_ObjectHideFlags: 0
