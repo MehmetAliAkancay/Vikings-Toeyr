@@ -16,8 +16,4 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Oyundan cikildi!");
         Application.Quit();
     }
-    public void ReturnToMenu()
-    {
-        SceneManager.LoadScene("MenuScene");
-    }
 }
