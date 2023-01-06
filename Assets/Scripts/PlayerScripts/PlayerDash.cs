@@ -11,6 +11,7 @@ public class PlayerDash : PlayerSkills
     }
     private float DashMultiple = 5f;
     private bool direction;
+    public bool canIDash = true;
     private void Update()
     {
         Dash();
@@ -23,7 +24,7 @@ public class PlayerDash : PlayerSkills
             direction = true;
         if (Time.time >= nextSkillTime)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && canIDash)
             {
                 if(direction)
                     transform.position += new Vector3(DashMultiple, 0);
@@ -31,6 +32,10 @@ public class PlayerDash : PlayerSkills
                     transform.position += new Vector3(-DashMultiple, 0);
                 nextSkillTime = Time.time + skillCooldown;
             }
+        }
+        else
+        {
+            Debug.Log(nextSkillTime-Time.time);
         }
     }
 }

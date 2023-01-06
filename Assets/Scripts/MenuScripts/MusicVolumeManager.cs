@@ -10,9 +10,13 @@ public class MusicVolumeManager : MonoBehaviour
     public AudioSource music;
     public Slider slider;
     public TextMeshProUGUI musicAmount;
-
+    private void Awake()
+    {
+        slider.value = PlayerPrefs.GetFloat("MusicVolume");
+    }
     public void MusicSys()
     {
+        PlayerPrefs.SetFloat("MusicVolume", slider.value);
         music.volume = slider.value;
         musicAmount.text = (slider.value * 100).ToString();
         double numara = Convert.ToDouble(musicAmount.text);
@@ -28,6 +32,5 @@ public class MusicVolumeManager : MonoBehaviour
         {
             musicAmount.text = musicAmount.text[0] + "" + musicAmount.text[1];
         }
-
     }
 }

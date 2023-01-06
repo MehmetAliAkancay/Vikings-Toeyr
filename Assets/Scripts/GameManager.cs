@@ -3,51 +3,41 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-    public GameObject pauseMenu;
-    private void Update()
+    bool gameIsEnded = false;
+    public GameObject dieMenu;
+    public GameObject winMenu;
+    public void WinGame()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (!gameIsEnded)
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            gameIsEnded = true;
+            Time.timeScale = 0;
+            winMenu.SetActive(true);
         }
     }
-    public void Resume()
+    public void LoseGame()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
-        GameIsPaused = false;
+        if(!gameIsEnded)
+        {
+            gameIsEnded = true;
+            Time.timeScale = 0;
+            dieMenu.SetActive(true);
+        } 
     }
-    public void Pause()
+    public void Restart()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0;
-        GameIsPaused = true;
+        gameIsEnded = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("MenuScene");
         Time.timeScale = 1;
-        GameIsPaused = false;
+        gameIsEnded = false;
     }
-
     public void QuitGame()
     {
         Application.Quit();
-    }
-    public void WinGame()
-    {
-
-    }
-    public void LoseGame()
-    {
-
     }
 }

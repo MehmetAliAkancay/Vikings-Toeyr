@@ -20,7 +20,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        Attacking();
+        if(Time.timeScale==1)
+            Attacking();
     }
     private void Start()
     {

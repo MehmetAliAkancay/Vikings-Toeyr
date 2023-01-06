@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGetSmall : PlayerSkills
+public class PlayerGetSmall : MonoBehaviour
 {
-    private PlayerGetSmall()
-    {
-        nextSkillTime = 0;
-        skillCooldown = 10;
-    }
     private Player player;
+    public bool canIGrow;
+    public bool headCheck=false;
     private void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -20,21 +17,25 @@ public class PlayerGetSmall : PlayerSkills
     }
     private void GetSmall()
     {
-        if(Time.time>=nextSkillTime)
-        {
-            if(Input.GetKeyDown(KeyCode.C))
-            {
-                StartCoroutine(GetSmalls());
-                nextSkillTime = Time.time+skillCooldown;
-            }
-        }
+       if(Input.GetKeyDown(KeyCode.C) && !canIGrow)
+       {
+            Smaller();
+       }
+       else if(Input.GetKeyDown(KeyCode.C) && canIGrow && !headCheck)
+       {
+            GrowUp();
+       }
     }
-    IEnumerator GetSmalls()
+    private void Smaller()
     {
         transform.localScale = new Vector3(3, 3);
         player.atackPower = 10;
-        yield return new WaitForSecondsRealtime(5f);
+        canIGrow = true;
+    }
+    private void GrowUp()
+    {
         player.atackPower = 30;
         transform.localScale = new Vector3(5, 5);
+        canIGrow = false;
     }
 }

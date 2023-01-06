@@ -16,7 +16,7 @@ public class Player : Character
         atackPower = 30;
         defence = 100; 
         jumpAmount = 5;
-        speedAmount = 5;
+        speedAmount = 8;
     }
     void Start()
     {
@@ -34,7 +34,6 @@ public class Player : Character
         hp -= amount;
         if (hp <= 0)
         {
-            Debug.Log("GameOver");
             PlayerDie();
         }
         else
@@ -56,14 +55,18 @@ public class Player : Character
             rb.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);        //karakterin ziplamasi 
             animator.SetBool("isJump", true);                                //animasyon ziplama koþulu saglandi
         }
-        if (Input.GetAxisRaw("Horizontal") == -1)              //karekterin saga dogru bakmasi
+        if(Time.timeScale==1)
         {
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            if (Input.GetAxisRaw("Horizontal") == -1)              //karekterin saga dogru bakmasi
+            {
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+            else if (Input.GetAxisRaw("Horizontal") == 1)         //karakterin sola dogru bakmasi
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
         }
-        else if (Input.GetAxisRaw("Horizontal") == 1)         //karakterin sola dogru bakmasi
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
+        
     }
     IEnumerator DamageFade()
     {
@@ -78,6 +81,7 @@ public class Player : Character
         rb.gravityScale = 0;
         animator.enabled = false;
         this.enabled = false;
+        FindObjectOfType<GameManager>().LoseGame();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
