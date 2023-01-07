@@ -14,7 +14,6 @@ public class Player : Character
     {
         hp = 100;
         atackPower = 30;
-        defence = 100; 
         jumpAmount = 5;
         speedAmount = 8;
     }
