@@ -15,7 +15,7 @@ public class Player : Character
         hp = 100;
         atackPower = 30;
         jumpAmount = 5;
-        speedAmount = 8;
+        speedAmount = 6;
     }
     void Start()
     {
@@ -87,6 +87,10 @@ public class Player : Character
         if(collision.gameObject.name=="Ground")
         {
             animator.SetBool("isJump" , false);        //karakterin zemin ile temas kontrolu
+        }
+        if(collision.gameObject.name=="Trambolin")
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

@@ -6,10 +6,15 @@ public class GameManager : MonoBehaviour
     bool gameIsEnded = false;
     public GameObject dieMenu;
     public GameObject winMenu;
+    public AudioSource dieMusic;
+    public AudioSource winMusic;
+    public AudioSource gameMusic;
     public void WinGame()
     {
         if (!gameIsEnded)
         {
+            gameMusic.Pause();
+            winMusic.Play();
             gameIsEnded = true;
             Time.timeScale = 0;
             winMenu.SetActive(true);
@@ -19,6 +24,8 @@ public class GameManager : MonoBehaviour
     {
         if(!gameIsEnded)
         {
+            gameMusic.Pause();
+            dieMusic.Play();
             gameIsEnded = true;
             Time.timeScale = 0;
             dieMenu.SetActive(true);

@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerDash : PlayerSkills
 {
+    public TMP_Text dashCooldown;
     private PlayerDash()
     {
         nextSkillTime = 0f;
         skillCooldown = 5f;
     }
-    private float DashMultiple = 5f;
+    private float DashMultiple = 10f;
     private bool direction;
     public bool canIDash = true;
     private void Update()
@@ -35,7 +37,7 @@ public class PlayerDash : PlayerSkills
         }
         else
         {
-            Debug.Log(nextSkillTime-Time.time);
+            dashCooldown.text =Mathf.RoundToInt((nextSkillTime - Time.time)).ToString();
         }
     }
 }

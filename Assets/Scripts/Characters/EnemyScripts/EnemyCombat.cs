@@ -7,6 +7,7 @@ public class EnemyCombat : MonoBehaviour
     Player player;
     Enemy enemy;
     private float nextDamageTime = 0f;
+    public float nextDamageCooling = 1f;
     private void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -19,7 +20,7 @@ public class EnemyCombat : MonoBehaviour
             if(Time.time>=nextDamageTime)
             {
                 player.PlayerTakeDamage(enemy.atackPower);
-                nextDamageTime = Time.time+2f;
+                nextDamageTime = Time.time+nextDamageCooling;
             }
            
         }

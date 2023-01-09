@@ -9,7 +9,8 @@ public class RandomStats : MonoBehaviour
     private int getAttackPower = 5;
     private int getSpeedAmount = 2;
     private int getHp = 10;
-    private int returnStatsDelay = 5;
+    private float returnStatsDelay = 5f;
+    public Collider2D collider;
     #endregion
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -19,33 +20,30 @@ public class RandomStats : MonoBehaviour
 
             if (rand == 1)
             {
-                Debug.Log("hýz arttýrýldý");
-                other.GetComponent<Player>().speedAmount += getSpeedAmount;
-                StartCoroutine(ResetSpeed(other.gameObject, returnStatsDelay));
+                StartCoroutine(ResetSpeed(other.gameObject,returnStatsDelay));
             }
             else if (rand == 2)
             {
-                Debug.Log("can kazanýldý");
-                other.GetComponent<Player>().hp = Mathf.Min(other.GetComponent<Player>().hp + getHp, playerMaxHp);
+                if(other.GetComponent<Player>().hp<playerMaxHp)
+                    other.GetComponent<Player>().hp += getHp;
             }
             else if (rand == 3)
             {
-                Debug.Log("attackpower arttýrýldý");
-                other.GetComponent<Player>().atackPower += getAttackPower;
-                StartCoroutine(ResetAttackPower(other.gameObject, returnStatsDelay));
+                StartCoroutine(ResetAttackPower(other.gameObject,returnStatsDelay));
             }
-            Destroy(gameObject);
+            collider.enabled = false;
         }
     }
-    IEnumerator ResetSpeed(GameObject player, float time)
+    IEnumerator ResetSpeed(GameObject player,float time)
     {
+        player.GetComponent<Player>().speedAmount += getSpeedAmount;
         yield return new WaitForSeconds(time);
         player.GetComponent<Player>().speedAmount -= getSpeedAmount;
     }
-    IEnumerator ResetAttackPower(GameObject player, float time)
+    IEnumerator ResetAttackPower(GameObject player,float time)
     {
-        yield return new WaitForSeconds(time);
+        player.GetComponent<Player>().atackPower += getAttackPower;
+        yield return new WaitForSecondsRealtime(time);
         player.GetComponent<Player>().atackPower -= getAttackPower;
     }
 }
-
