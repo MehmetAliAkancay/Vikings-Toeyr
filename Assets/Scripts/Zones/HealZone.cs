@@ -31,7 +31,7 @@ public class HealZone : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && player.hp < 100)
+        if (collision.gameObject.CompareTag("Player") )
         {
             CancelInvoke("GetHeal");
         }

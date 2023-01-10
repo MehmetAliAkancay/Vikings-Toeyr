@@ -10,6 +10,7 @@ public class RandomStats : MonoBehaviour
     private int getSpeedAmount = 2;
     private int getHp = 10;
     private float returnStatsDelay = 5f;
+    public HealthBar health;
     public Collider2D collider;
     #endregion
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,7 +26,10 @@ public class RandomStats : MonoBehaviour
             else if (rand == 2)
             {
                 if(other.GetComponent<Player>().hp<playerMaxHp)
+                {
                     other.GetComponent<Player>().hp += getHp;
+                    health.SetHealth(other.GetComponent<Player>().hp);
+                }
             }
             else if (rand == 3)
             {

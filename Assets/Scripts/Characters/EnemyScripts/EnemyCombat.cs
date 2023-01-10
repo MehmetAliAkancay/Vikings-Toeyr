@@ -22,7 +22,6 @@ public class EnemyCombat : MonoBehaviour
                 player.PlayerTakeDamage(enemy.atackPower);
                 nextDamageTime = Time.time+nextDamageCooling;
             }
-           
         }
     }
 }

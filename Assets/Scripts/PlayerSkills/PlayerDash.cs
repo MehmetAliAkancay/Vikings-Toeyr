@@ -9,7 +9,7 @@ public class PlayerDash : PlayerSkills
     private PlayerDash()
     {
         nextSkillTime = 0f;
-        skillCooldown = 5f;
+        skillCooldown = 10f;
     }
     private float DashMultiple = 10f;
     private bool direction;
